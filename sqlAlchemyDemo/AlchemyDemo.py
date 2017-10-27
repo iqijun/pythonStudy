@@ -12,11 +12,22 @@ Base = declarative_base()
 engine = create_engine('mysql+pymysql://phoenix_es:phoenix_es@192.168.6.120:3306/phoenix_es')
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
-augMent = BizAugment()
-augMent.chapter_id = 100
-augMent.kp_id = 100
+
 
 session = DBSession()
-session.add(augMent)
-session.commit()
+#增
+# augMent = BizAugment()
+# augMent.chapter_id = 100
+# augMent.kp_id = 100
+# session.add(augMent)
+# session.commit()
+
+
+# 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+augMents = session.query(BizAugment).all() #.filter(BizAugment.id == '18')
+# 打印类型和对象的name属性:
+for augMent in augMents:
+    print(augMent.kp_id)
+
+
 session.close()
