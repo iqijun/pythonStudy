@@ -10,6 +10,7 @@ allpage = ''.join(filter(str.isdigit, getPage_text))  # 得到一共多少页
 # for
 # 得到点击的span
 def getData(myrange):
+    print("=======start getData===========")
     for x in myrange:
         tonum = driver.find_element_by_id("tonum") #得到tonum文本框
         jumpbtn = driver.find_element_by_id("btn_jump") #跳转到按钮
@@ -20,6 +21,7 @@ def getData(myrange):
                                         .get_attribute("class").find("at") != -1)
         with open("../htmls/{0}.txt".format(x),'wb') as f:
             f.write(driver.find_element_by_id("tableDiv").get_attribute("innerHTML").encode('utf-8'))
+            print("=========fileName:"+str(x))
             f.close()
 
 
@@ -31,7 +33,8 @@ if __name__ == '__main__':
     for r in range_list:
         p=Process(target=getData,args=(r,))
         processList.append(p)
-
-    for p in processList:
         p.start()
+    for p in processList:
+        p.join()
+
 
