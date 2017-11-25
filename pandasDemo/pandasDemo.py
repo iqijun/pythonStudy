@@ -2,7 +2,7 @@
 
 import pandas
 
-from Spider.FundDetail import writeToCSV
+from spider.FundDetail import writeToCSV
 import time
 if __name__ == '__main__':
     #writeToCSV 调用它 就可以写入csv文件

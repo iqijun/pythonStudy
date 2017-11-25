@@ -26,7 +26,7 @@ def getData(myrange,driver,lock):
             jumpbtn.click()
             WebDriverWait(driver, 20).until(lambda driver: driver.find_element_by_id("pagebar").find_element_by_xpath(
                 "div[@class='pagebtns']/label[@value={0} and @class='cur']".format(x))!=None)
-        with open("./htmls/details/{0}.txt".format(x), 'wb') as f:
+        with open("../htmls/details/{0}.txt".format(x), 'wb') as f:
             f.write(driver.find_element_by_id("jztable").get_attribute("innerHTML").encode('utf-8'))
             f.close()
             lock.release()
@@ -67,7 +67,7 @@ def getFundData(html):
 
 #把抓取到的内容解析并写入csv文件
 def writeToCSV():
-    datadir = "./htmls/details"
+    datadir = "../htmls/details"
     allpath = os.listdir(datadir)
     allresult=[]
     for p in allpath:
@@ -77,7 +77,7 @@ def writeToCSV():
                 f.close()
                 allresult=allresult+getFundData(fileCnt)  #list合并 直接可用+   如list=list1+list2
 
-    with open("./csvfiles/001112.csv",'w',encoding="utf-8",newline='') as f:
+    with open("../csvfiles/001112.csv",'w',encoding="utf-8",newline='') as f:
         writer=csv.writer(f)
         writer.writerow(['fcode', 'fdate', 'NAV', "ACCNAV", 'DGR', 'pstate',"rstate"])
         for r in allresult:
